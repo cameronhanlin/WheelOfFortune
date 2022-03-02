@@ -14,44 +14,43 @@ public class Main {
 
         boolean notSolved = true;
         String guess;
+        int numOccur;
 
-        while(notSolved){
+        while (notSolved) {
             white.outputPuzzle();
 
-            do{
-                System.out.print("Please guess a character or solve the puzzle: ");
-                guess = scan.nextLine();
-
+            do {
+                player1.playerSpin();
+                if (player1.getSpinPlace() > 1) {
+                    System.out.print("Please guess a character or solve the puzzle: ");
+                    guess = scan.nextLine();
+                }else if (player1.getSpinPlace()==1) {
+                    guess ="*";
+                } else guess = ("%");
 
                 notSolved = white.solveCheck(guess);
-                if (notSolved == false){
+                if (notSolved == false) {
                     guess = "*";
                 }
-
-
 
 
             } while (guess.length() > 1);
             guess = guess.toUpperCase(Locale.ROOT);
 
 
-            white.letterGuess(guess);
+            numOccur = white.letterGuess(guess);
+
+            player1.changeScore(numOccur);
+            System.out.println(" ");
             guess = "XX";
-
+            numOccur = 0;
         }
-
-
-
 
 
         //boolean notSolved = true;
 
 
-
-
         System.out.println("Congrats! You're right!");
-
-
 
 
     }
