@@ -4,6 +4,8 @@ import java.util.Locale;
 
 public class Vana {
 
+
+
     private Puzzle puzzle = new Puzzle();
     private String phrase;
     private String category;
@@ -21,22 +23,36 @@ public class Vana {
         category = puzzle.getCategory();
         emptyPhrase = phrase.replaceAll("[a-zA-Z]","X");
         finalPhrase = phrase;
+       // notSolved = true;
     }
 
+    /*public boolean getNotSolved(){
+        return notSolved;
+    }
+
+    public void switchNotSolved(){
+        notSolved = !notSolved;
+    }
+
+     */
+
     public void outputPuzzle(){
-        System.out.println(phrase);
+        //System.out.println(phrase);
         System.out.println(category);
         System.out.println(emptyPhrase);
-        System.out.println(finalPhrase);
+        //System.out.println(finalPhrase);
     }
 
     public void letterGuess(String guess){
         int x;
 
-
-        if(phrase.indexOf(guess) == -1){
+        if(guess.equals("*")){
+            //nothing needs to happen
+        }
+        else if(phrase.indexOf(guess) == -1){
             System.out.println("Sorry, that letter is not in the puzzle");
-        } else {
+        }
+        else {
             while(phrase.indexOf(guess) != -1){
                 x = phrase.indexOf(guess);
                 emptyPhrase = emptyPhrase.substring(0,x)+phrase.charAt(x)+emptyPhrase.substring(x+1);
@@ -44,10 +60,11 @@ public class Vana {
             }
 
         }
+        //this is going to have to return a number for how many letters of the guess are in the puzzle.
     }
 
     public boolean solveCheck(String guess){
-        guess.toUpperCase(Locale.ROOT);
+        guess = guess.toUpperCase(Locale.ROOT);
         return !guess.equals(finalPhrase);
     }
 
