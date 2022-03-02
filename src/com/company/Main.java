@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -10,21 +12,26 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         Vana white = new Vana();
-        Player player1 = new Player("George");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(new Player("Andrea"));
+        playerList.add(new Player("Ehab"));
+        playerList.add(new Player("Julia"));
+        Player winner = new Player();
 
         boolean notSolved = true;
         String guess;
         int numOccur;
+        int turn = 0;
 
         while (notSolved) {
             white.outputPuzzle();
 
             do {
-                player1.playerSpin();
-                if (player1.getSpinPlace() > 1) {
+                playerList.get(turn).playerSpin();
+                if (playerList.get(turn).getSpinPlace() > 1) {
                     System.out.print("Please guess a character or solve the puzzle: ");
                     guess = scan.nextLine();
-                }else if (player1.getSpinPlace()==1) {
+                }else if (playerList.get(turn).getSpinPlace()==1) {
                     guess ="*";
                 } else guess = ("%");
 
@@ -40,8 +47,13 @@ public class Main {
 
             numOccur = white.letterGuess(guess);
 
-            player1.changeScore(numOccur);
+            playerList.get(turn).changeScore(numOccur);
             System.out.println(" ");
+            turn++;
+            if (turn == 3){
+                turn=0;
+            }
+
             guess = "XX";
             numOccur = 0;
         }
@@ -49,8 +61,14 @@ public class Main {
 
         //boolean notSolved = true;
 
-
-        System.out.println("Congrats! You're right!");
+        winner=playerList.get(1);
+        if (winner.getScore() < playerList.get(2).getScore()){
+            winner=playerList.get(2);
+        }
+        if (winner.getScore() < playerList.get(3).getScore()){
+            winner=playerList.get(3);
+        }
+        System.out.println("Congrats!" +winner.getName()+ " you win with a final score of "+ winner.getScore());
 
 
     }

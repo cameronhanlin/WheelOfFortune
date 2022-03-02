@@ -19,6 +19,7 @@ public class Player {
         this.name = name;
         score = 0;
     }
+    public Player(){}
 
     public int getScore() {
         return score;
