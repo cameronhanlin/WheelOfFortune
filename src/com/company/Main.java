@@ -61,12 +61,12 @@ public class Main {
 
         //boolean notSolved = true;
 
-        winner=playerList.get(1);
+        winner=playerList.get(0);
+        if (winner.getScore() < playerList.get(1).getScore()){
+            winner=playerList.get(1);
+        }
         if (winner.getScore() < playerList.get(2).getScore()){
             winner=playerList.get(2);
-        }
-        if (winner.getScore() < playerList.get(3).getScore()){
-            winner=playerList.get(3);
         }
         System.out.println("Congrats!" +winner.getName()+ " you win with a final score of "+ winner.getScore());
 
